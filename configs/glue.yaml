@@ -1,0 +1,21 @@
+# @package _global_
+
+defaults:
+  - _self_
+  - datamodule: default.yaml
+  - model: automodel.yaml
+  - task: mrpc.yaml
+  - logger: 
+    - tensorboard.yaml
+    - wandb.yaml
+  - trainer: default.yaml
+  - callbacks: default.yaml
+  - hydra: default.yaml
+
+# path to original working directory
+work_dir: ${hydra:runtime.cwd}
+
+model_name: bert-base-uncased
+seed: 42
+
+exp_name: ${model_name}/${task.task_name}
