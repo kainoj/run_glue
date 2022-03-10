@@ -1,13 +1,20 @@
+# Definition of a bare 🤗model.
+# See: https://huggingface.co/docs/transformers/model_doc/auto
+
 _target_: src.models.glue_model.GlueModel
+
+task_name: ${datamodule.task_name}
 
 model:
   _target_: transformers.AutoModelForSequenceClassification.from_pretrained
+  # A name of a pre-trained 🤗model (defined in configs/defaults.yaml)
   pretrained_model_name_or_path: ${model_name}
+
+  # Number of labels (classes) for a given task. Needed to initialize classification head.
   num_labels: ${task.num_labels}
 
+# Defaults for original run_glue.py
 learning_rate: 2e-5
-task_name: ${datamodule.task_name}
-
 weight_decay: 0.0
 adam_epsilon: 1e-8
 warmup_steps: 0

@@ -1,5 +1,10 @@
 # @package _global_
 
+# `defaults` define default configs for particular modules.
+
+# Elements of this list pattern-match files under config/
+# eg.: `- model: automodel.yaml` refers to config/automodel.yaml
+
 defaults:
   - _self_
   - datamodule: default.yaml
@@ -12,10 +17,14 @@ defaults:
   - callbacks: default.yaml
   - hydra: default.yaml
 
-# path to original working directory
+# Path to original working directory
 work_dir: ${hydra:runtime.cwd}
 
+# Any 🤗's model, eg. bert-base-uncased, distilbert-base-uncased, etc
 model_name: bert-base-uncased
+
+# For reproducibility
 seed: 42
 
+# Experiment name, as it shows in Tensorboard or Weights & Biases
 exp_name: ${model_name}/${task.task_name}
