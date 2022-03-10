@@ -21,7 +21,7 @@ task_to_keys = {
 class GlueDataModule(LightningDataModule):
 
     """A basic wrapper for 🤗's GLUE dataset.
-    
+
     Download, cache and pre-tokenize a dataset for a given GLUE task.
 
     Args:

@@ -12,5 +12,6 @@ def main(config: DictConfig):
 
     run_glue(config)
 
+
 if __name__ == "__main__":
     main()

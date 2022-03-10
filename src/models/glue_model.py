@@ -79,7 +79,7 @@ class GlueModel(LightningModule):
     @property
     def total_training_steps(self) -> int:
         """Total training steps inferred from datamodule and devices.
-        
+
         Code courtesy of Mario.
         """
         if isinstance(self.trainer.limit_train_batches, int) and self.trainer.limit_train_batches != 0:
