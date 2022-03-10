@@ -1,4 +1,5 @@
 import torch
+from torch import nn
 
 from pytorch_lightning import LightningModule
 from transformers import AdamW, get_linear_schedule_with_warmup
@@ -7,7 +8,23 @@ from datasets import load_metric
 
 class GlueModel(LightningModule):
 
-    def __init__(self, model, learning_rate, task_name, weight_decay, adam_epsilon, warmup_steps) -> None:
+    """Lightning module that defines behavior of the training loop.
+
+    Args:
+        model: actual 🤗model to evaluate. Must retrun SequenceClassifierOutput on forward.
+        task_name: cola, sst2, mrpc, stsb, qqp, mnli, qnli, rte, or wnli
+        learning_rate, weight_decay, adam_epsilon, warmup_steps: stuff for optimizer and scheduler
+    """
+
+    def __init__(
+        self,
+        model: nn.Module,
+        task_name: str,
+        learning_rate: float,
+        weight_decay: float,
+        adam_epsilon: float,
+        warmup_steps: int,
+    ) -> None:
         super().__init__()
         self.save_hyperparameters(logger=False)
 
@@ -22,10 +39,13 @@ class GlueModel(LightningModule):
         self.warmup_steps = warmup_steps
 
     def step(self, inputs):
+        """Forward the model.
+        """
         return self.model(**inputs)
 
     def training_step(self, batch, batch_idx):
-
+        """Forward, loss and log.
+        """
         outputs = self.step(batch)
 
         loss = outputs.loss
@@ -35,6 +55,8 @@ class GlueModel(LightningModule):
         return loss
 
     def validation_step(self, batch, batch_idx):
+        """Forward, loss, calculate metric and log.
+        """
         outputs = self.step(batch)
 
         loss = outputs.loss
@@ -56,7 +78,10 @@ class GlueModel(LightningModule):
 
     @property
     def total_training_steps(self) -> int:
-        """Total training steps inferred from datamodule and devices."""
+        """Total training steps inferred from datamodule and devices.
+        
+        Code courtesy of Mario.
+        """
         if isinstance(self.trainer.limit_train_batches, int) and self.trainer.limit_train_batches != 0:
             dataset_size = self.trainer.limit_train_batches
         elif isinstance(self.trainer.limit_train_batches, float):
@@ -78,6 +103,8 @@ class GlueModel(LightningModule):
         return max_estimated_steps
 
     def configure_optimizers(self):
+        """Configure the optimizer and the scheduler.
+        """
         no_decay = ["bias", "LayerNorm.weight"]
         optimizer_grouped_parameters = [
             {
@@ -98,4 +125,5 @@ class GlueModel(LightningModule):
             num_training_steps=self.total_training_steps,
         )
         scheduler = {"scheduler": scheduler, "interval": "step", "frequency": 1}
+
         return [optimizer], [scheduler]
