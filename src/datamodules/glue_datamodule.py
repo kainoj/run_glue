@@ -20,6 +20,19 @@ task_to_keys = {
 
 class GlueDataModule(LightningDataModule):
 
+    """A basic wrapper for 🤗's GLUE dataset.
+    
+    Download, cache and pre-tokenize a dataset for a given GLUE task.
+
+    Args:
+        task_name: cola, sst2, mrpc, stsb, qqp, mnli, qnli, rte, or wnli
+        tokenize_name: same as pre-trained model name (e.g bert-base-uncased)
+        max_seq_length: maximum sequence length
+        batch_size: batch size (try 32 or 128)
+        cache_dir: where to cache downloaded dataset?
+        overwite_cache: overwrite?
+    """
+
     def __init__(
         self,
         task_name: str,
@@ -39,6 +52,8 @@ class GlueDataModule(LightningDataModule):
 
     @property
     def num_labels(self) -> int:
+        """Number of classification labels (usually 1, 2 or 3).
+        """
         is_regression = self.task_name == "stsb"
         if not is_regression:
             label_list = self.data["train"].features["label"].names
@@ -46,9 +61,13 @@ class GlueDataModule(LightningDataModule):
         return 1
 
     def prepare_data(self):
+        """Download and cache the dataset. Executed on the main thread only.
+        """
         load_dataset("glue", self.task_name, cache_dir=self.cache_dir)
 
     def setup(self, stage: Optional[str] = None):
+        """Load dataset from cache and then pre-tokenize it.
+        """
         self.tokenizer = AutoTokenizer.from_pretrained(self.tokenizer_name)
         self.data = load_dataset("glue", self.task_name, cache_dir=self.cache_dir)
 
@@ -58,10 +77,13 @@ class GlueDataModule(LightningDataModule):
             load_from_cache_file=not self.overwrite_cache,
             desc="Running tokenizer on dataset",
         )
+
+        # Set torch-style data format.
         self.data.set_format(type='torch', columns=['input_ids', 'token_type_ids', 'attention_mask', 'label'])
 
     def preprocess_function(self, examples):
-        # Tokenize the texts
+        """Task-specific pre-tokenizer.
+        """
         sentence1_key, sentence2_key = task_to_keys[self.task_name]
 
         args = (
