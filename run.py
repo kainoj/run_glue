@@ -2,7 +2,7 @@ import hydra
 from omegaconf import DictConfig
 
 
-@hydra.main(config_path="configs/", config_name="glue.yaml")
+@hydra.main(config_path="configs/", config_name="defaults.yaml")
 def main(config: DictConfig):
 
     from src.run_glue import run_glue
