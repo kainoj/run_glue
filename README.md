@@ -19,7 +19,7 @@ python run_glue.py --multirun \
     task.task_name=cola,wnli,mrpc \
     trainer.gpus=2 \           # 2 gpus per task
     trainer.precision=16 \     # Mixed 16FP precision
-    datamodule.batch_size-256  # Beefy batch size
+    datamodule.batch_size=256  # Beefy batch size
 ```
 
 ### Setup
