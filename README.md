@@ -27,3 +27,8 @@ python run_glue.py --multirun \
 conda env create -f environment.yml
 conda activate run-glue
 ```
+
+
+#### Credits
+ - Lightning-hydra template by [ashleve](https://github.com/ashleve/lightning-hydra-template).
+ - Some functionalities taken from the original [run_glue.py](https://github.com/huggingface/transformers/blob/master/examples/pytorch/text-classification/run_glue.py).
