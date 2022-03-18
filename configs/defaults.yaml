@@ -26,7 +26,8 @@ model_name: bert-base-uncased
 # For reproducibility
 seed: 42
 
-# Set task name and num labels here, or TODO
+# Set task name and num labels here, or run
+# python run_glue.py experiment=wnli
 task:
   task_name: wnli
   num_labels: 2
