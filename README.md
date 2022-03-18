@@ -1,5 +1,7 @@
 # Easy to maintain, modular version of 🤗's `run_glue.py`
 
+👉See [wandb.ai dashboard](https://wandb.ai/kainoj/run-glue) here👈
+
 ### Evaluate your custom model in 3 steps:
  1. Put code of your model under [`src/models/`](src/models/)
  2. Configure it under [`configs/model/your_model.yaml`](configs/model/)
