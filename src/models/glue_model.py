@@ -1,4 +1,3 @@
-from typing import Dict
 import torch
 from torch import nn
 from torch.optim import AdamW
@@ -55,43 +54,22 @@ class GlueModel(LightningModule):
 
         return loss
 
-    def get_metrics(self, logits: torch.tensor, labels: torch.tensor) -> Dict[str, float]:
-        """Return a dict of metrics.
-
-        Args:
-            logits: raw, unnormalized logits
-            labels: reference, true labels. Must be same shape as logits.
-        """
-        preds = torch.squeeze(logits) if self.is_regression else torch.argmax(logits, axis=1)
-
-        result = self.metric.compute(predictions=preds, references=labels)
-
-        if len(result) > 1:
-            result["combined_score"] = torch.tensor(list(result.values())).mean().item()
-
-        return result
-
     def validation_step(self, batch, batch_idx):
         """Forward, loss, calculate metric and log.
         """
         loss, logits = self.step(batch)
 
-        result = self.get_metrics(logits, batch['labels'])
+        preds = torch.squeeze(logits) if self.is_regression else torch.argmax(logits, axis=1)
+
+        result = self.metric.compute(predictions=preds, references=batch['labels'])
+
+        if len(result) > 1:
+            result["combined_score"] = torch.tensor(list(result.values())).mean().item()
 
         for key, val in result.items():
             self.log(f"val/{key}", val, on_step=False, on_epoch=True, prog_bar=False)
 
         self.log("val/loss", loss, on_step=False, on_epoch=True, prog_bar=True)
-
-        return loss
-
-    def test_step(self, batch, batch_idx):
-        loss, logits = self.step(batch)
-
-        result = self.get_metrics(logits, batch['labels'])
-
-        for key, val in result.items():
-            self.log(f"test/{key}", val)
 
         return loss
 
