@@ -1,6 +1,8 @@
-# Easy to maintain, modular version of 🤗's `run_glue.py`
+# Easy to maintain, modular version of 🤗`run_glue.py`
 
-👉See [wandb.ai dashboard](https://wandb.ai/kainoj/run-glue) here👈
+## 👉 See [wandb.ai dashboard](https://wandb.ai/kainoj/run-glue) here 👈
+
+---
 
 ### Evaluate your custom model in 3 steps:
  1. Put code of your model under [`src/models/`](src/models/)
@@ -15,7 +17,7 @@ python run_glue.py --multirun \
 ```
 Will run 3*2 = 6.
 
-### Make GPUs do vroom-voom
+### Make GPUs do vroom-voom 🏎
 ```bash
 python run_glue.py --multirun \
     experiment=cola,wnli,mrpc \
