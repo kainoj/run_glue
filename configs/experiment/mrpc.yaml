@@ -1,7 +1,7 @@
 # @package _global_
 
 # To execute this experiment run:
-# python run.py experiment=mrpc  
+# python run_glue.py experiment=mrpc  
 
 defaults:
   - override /trainer: default.yaml

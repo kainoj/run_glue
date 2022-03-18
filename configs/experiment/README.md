@@ -3,7 +3,7 @@
 
 To evaluate on `cola`, run:
 ```bash
-python run.py experiment=cola
+python run_glue.py experiment=cola
 ```
 and so on. You can choose among following tasks:
 cola, sst2, mrpc, qqp, qnli, rte, wnli.
@@ -12,7 +12,7 @@ cola, sst2, mrpc, qqp, qnli, rte, wnli.
 
 To evaluate on the whole GLUE suite:
 ```bash
-python run.py --multirun \
+python run_glue.py --multirun \
     experiment=cola,sst2,mrpc,qqp,qnli,rte,wnli 
 ```
 it simply sweeps among multiple experiment files.
