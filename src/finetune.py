@@ -63,3 +63,14 @@ def finetune(config):
 
     log.info("Starting fine-tuning!")
     trainer.fit(model=model, datamodule=datamodule)
+
+    log.info("Finalizing!")
+    utils.finish(
+        config=config,
+        model=model,
+        datamodule=datamodule,
+        trainer=trainer,
+        callbacks=callbacks,
+        logger=logger,
+    )
+    log.info("Done.")
