@@ -4,6 +4,7 @@
 # python run.py experiment=cola
 
 task:
-  cola: 2
+  task_name: cola
+  num_labels: 2
 
-exp_name: glue-cola/${model_name}
+exp_name: ${model_name}/${task.task_name}

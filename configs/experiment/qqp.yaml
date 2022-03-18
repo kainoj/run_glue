@@ -4,6 +4,7 @@
 # python run.py experiment=qqp
 
 task:
-  qqp: 2
+  task_name: qqp
+  num_labels: 2
 
-exp_name: glue-qqp/${model_name}
+exp_name: ${model_name}/${task.task_name}

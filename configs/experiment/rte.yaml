@@ -4,6 +4,7 @@
 # python run.py experiment=rte
 
 task:
-  rte: 2
+  task_name: rte
+  num_labels: 2
 
-exp_name: glue-rte/${model_name}
+exp_name: ${model_name}/${task.task_name}

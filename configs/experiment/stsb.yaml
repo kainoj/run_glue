@@ -4,6 +4,7 @@
 # python run.py experiment=stsb
 
 task:
-  stsb: 2
+  task_name: stsb
+  num_labels: 2
 
-exp_name: glue-stsb/${model_name}
+exp_name: ${model_name}/${task.task_name}
