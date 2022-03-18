@@ -100,4 +100,4 @@ class GlueDataModule(LightningDataModule):
         return DataLoader(self.data['validation'], batch_size=self.batch_size, collate_fn=default_data_collator)
 
     def test_dataloader(self):
-        pass
+        return DataLoader(self.data['test'], batch_size=self.batch_size, collate_fn=default_data_collator)
