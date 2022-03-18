@@ -15,7 +15,7 @@ from src import utils
 log = utils.get_logger(__name__)
 
 
-def run_glue(config):
+def finetune(config):
 
     if config.get("seed"):
         seed_everything(config.seed, workers=True)
