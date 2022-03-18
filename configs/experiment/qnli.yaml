@@ -1,0 +1,9 @@
+# @package _global_
+
+# To execute this experiment run:
+# python run.py experiment=qnli
+
+task:
+  qnli: 2
+
+exp_name: glue-qnli/${model_name}

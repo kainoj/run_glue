@@ -1,0 +1,9 @@
+# @package _global_
+
+# To execute this experiment run:
+# python run.py experiment=stsb
+
+task:
+  stsb: 2
+
+exp_name: glue-stsb/${model_name}

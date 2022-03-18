@@ -9,13 +9,13 @@ defaults:
   - _self_
   - datamodule: default.yaml
   - model: automodel.yaml
-  - task: mrpc.yaml
   - logger: 
     - tensorboard.yaml
     - wandb.yaml
   - trainer: default.yaml
   - callbacks: default.yaml
   - hydra: default.yaml
+  - experiment: null # set eg. cola.yaml
 
 # Path to original working directory
 work_dir: ${hydra:runtime.cwd}
@@ -25,6 +25,11 @@ model_name: bert-base-uncased
 
 # For reproducibility
 seed: 42
+
+# Set task name and num labels here, or TODO
+task:
+  task_name: wnli
+  num_labels: 2
 
 # Experiment name, as it shows in Tensorboard or Weights & Biases
 exp_name: ${model_name}/${task.task_name}

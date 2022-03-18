@@ -1,0 +1,9 @@
+# @package _global_
+
+# To execute this experiment run:
+# python run.py experiment=cola
+
+task:
+  cola: 2
+
+exp_name: glue-cola/${model_name}

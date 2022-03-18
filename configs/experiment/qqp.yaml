@@ -1,0 +1,9 @@
+# @package _global_
+
+# To execute this experiment run:
+# python run.py experiment=qqp
+
+task:
+  qqp: 2
+
+exp_name: glue-qqp/${model_name}

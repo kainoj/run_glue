@@ -1,0 +1,17 @@
+# @package _global_
+
+# To execute this experiment run:
+# python run.py experiment=wnli  
+
+defaults:
+  - override /trainer: default.yaml
+
+# WNLI is trained for 5 epochs
+# ref. https://github.com/huggingface/transformers/tree/master/examples/pytorch/text-classification
+trainer:
+  max_epochs: 5
+
+task:
+  wnli: 2
+
+exp_name: glue-wnli/${model_name}

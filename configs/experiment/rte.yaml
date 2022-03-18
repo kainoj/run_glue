@@ -1,0 +1,9 @@
+# @package _global_
+
+# To execute this experiment run:
+# python run.py experiment=rte
+
+task:
+  rte: 2
+
+exp_name: glue-rte/${model_name}

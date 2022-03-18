@@ -1,0 +1,9 @@
+# @package _global_
+
+# To execute this experiment run:
+# python run.py experiment=sst2
+
+task:
+  sst2: 2
+
+exp_name: glue-sst2/${model_name}
