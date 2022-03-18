@@ -1,9 +1,10 @@
 from typing import Dict
 import torch
 from torch import nn
+from torch.optim import AdamW
 
 from pytorch_lightning import LightningModule
-from transformers import AdamW, get_linear_schedule_with_warmup
+from transformers import get_linear_schedule_with_warmup
 from datasets import load_metric
 
 
