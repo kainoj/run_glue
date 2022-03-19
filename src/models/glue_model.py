@@ -63,8 +63,7 @@ class GlueModel(LightningModule):
 
         result = self.metric.compute(predictions=preds, references=batch['labels'])
 
-        if len(result) > 1:
-            result["combined_score"] = torch.tensor(list(result.values())).mean().item()
+        result["combined_score"] = torch.tensor(list(result.values())).mean().item()
 
         for key, val in result.items():
             self.log(f"val/{key}", val, on_step=False, on_epoch=True, prog_bar=False)
