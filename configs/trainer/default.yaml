@@ -15,7 +15,7 @@ max_epochs: 3
 # Checkpoint path
 resume_from_checkpoint: null
 
-# Uncomment for 16-bit mixed floating-point precision (2x faster training)
+# 16-bit mixed floating-point precision (2x faster training)
 # https://pytorch-lightning.readthedocs.io/en/latest/guides/speed.html#mixed-precision-16-bit-training
 # https://github.com/huggingface/transformers/tree/master/examples/pytorch/text-classification#mixed-precision-training
-# precision: 16
+precision: 16
