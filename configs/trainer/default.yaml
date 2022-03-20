@@ -19,3 +19,5 @@ resume_from_checkpoint: null
 # https://pytorch-lightning.readthedocs.io/en/latest/guides/speed.html#mixed-precision-16-bit-training
 # https://github.com/huggingface/transformers/tree/master/examples/pytorch/text-classification#mixed-precision-training
 precision: 16
+
+gradient_clip_val: 1.0
