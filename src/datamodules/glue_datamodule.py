@@ -98,6 +98,7 @@ class GlueDataModule(LightningDataModule):
             self.data['train'],
             batch_size=self.batch_size,
             collate_fn=default_data_collator,
+            pin_memory=True,
             shuffle=True
         )
 
@@ -109,6 +110,7 @@ class GlueDataModule(LightningDataModule):
             self.data[split_name],
             batch_size=self.batch_size,
             collate_fn=default_data_collator,
+            pin_memory=True,
             shuffle=False
         )
 
@@ -120,5 +122,6 @@ class GlueDataModule(LightningDataModule):
             self.data[split_name],
             batch_size=self.batch_size,
             collate_fn=default_data_collator,
+            pin_memory=True,
             shuffle=False
         )
