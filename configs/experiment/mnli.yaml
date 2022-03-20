@@ -1,0 +1,10 @@
+# @package _global_
+
+# To execute this experiment run:
+# python run_glue.py experiment=mnli
+
+task:
+  task_name: mnli
+  num_labels: 3
+
+exp_name: ${model_name}/${task.task_name}

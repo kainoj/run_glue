@@ -102,16 +102,22 @@ class GlueDataModule(LightningDataModule):
         )
 
     def val_dataloader(self):
+
+        split_name = 'validation_matched' if self.task_name == 'mnli' else 'validation'
+
         return DataLoader(
-            self.data['validation'],
+            self.data[split_name],
             batch_size=self.batch_size,
             collate_fn=default_data_collator,
             shuffle=False
         )
 
     def test_dataloader(self):
+
+        split_name = 'test_matched' if self.task_name == 'mnli' else 'test'
+
         return DataLoader(
-            self.data['test'],
+            self.data[split_name],
             batch_size=self.batch_size,
             collate_fn=default_data_collator,
             shuffle=False
