@@ -1,6 +1,6 @@
 # Easy to maintain, modular version of 🤗`run_glue.py`
 
-## 👉 See [wandb.ai dashboard](https://wandb.ai/kainoj/run-glue) here 👈
+## 👉 See [wandb.ai dashboard](https://wandb.ai/kainoj/run-glue/table?workspace=user-kainoj) here 👈
 
 ---
 
